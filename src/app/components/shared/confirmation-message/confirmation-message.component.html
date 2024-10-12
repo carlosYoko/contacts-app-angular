@@ -2,7 +2,7 @@
 <div mat-dialog-content style="text-align: center;">
     <p>{{msg}}</p>
 </div>
-<div mat-dialog-actions style="margin-left: 130px;">
+<div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancelar</button>
     <button mat-button [mat-dialog-close]="btn" cdkFocusInitial>Aceptar</button>
 </div>

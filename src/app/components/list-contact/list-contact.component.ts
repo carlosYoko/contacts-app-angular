@@ -6,6 +6,7 @@ import { ContactService } from 'src/app/services/contact.service';
 import { Contact } from 'src/app/models/contact';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationMessageComponent } from '../shared/confirmation-message/confirmation-message.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class ListContactComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private readonly contactService: ContactService, public dialog: MatDialog) {
+  constructor(private readonly contactService: ContactService, public dialog: MatDialog, public snackBar: MatSnackBar) {
     this._contactService = contactService;
     this._dialog = dialog;
   }
@@ -60,6 +61,9 @@ export class ListContactComponent {
       if (result === 'accept') {
         this._contactService?.deleteContactById(i);
         this.loadContacts();
+        this.snackBar.open('Cliente eliminado', '', {
+          duration: 200000
+        })
       }
     })
   }
