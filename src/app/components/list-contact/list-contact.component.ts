@@ -53,7 +53,7 @@ export class ListContactComponent {
   deleteContact(i: number) {
     const dialogRef = this.dialog.open(ConfirmationMessageComponent, {
       width: '450px',
-      data: { msg: "Seguro que quieres eliminar el contacto?" }
+      data: { msg: "Vas a eliminar el contacto, quieres continuar?" }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -61,7 +61,7 @@ export class ListContactComponent {
       if (result === 'accept') {
         this._contactService?.deleteContactById(i);
         this.loadContacts();
-        this.snackBar.open('Cliente eliminado', '', {
+        this.snackBar.open('Contacto eliminado', '', {
           duration: 200000
         })
       }
