@@ -12,7 +12,7 @@ import { Contact } from 'src/app/models/contact';
   styleUrls: ['./list-contact.component.css']
 })
 export class ListContactComponent {
-  public displayedColumns: string[] = ['fullName', 'phone', 'email', 'entryDate', 'sex', 'actions'];
+  public displayedColumns: string[] = ['id', 'fullName', 'phone', 'email', 'entryDate', 'sex', 'actions'];
   public dataSource = new MatTableDataSource<Contact>();
   public listContact?: Contact[];
   private readonly _contactService?: ContactService
@@ -43,4 +43,10 @@ export class ListContactComponent {
     this.dataSource = new MatTableDataSource(this.listContact);
     console.log(this.listContact)
   }
+
+  deleteContact(i: number) {
+    this._contactService?.deleteContactById(i);
+    this.loadContacts();
+  }
+
 }
