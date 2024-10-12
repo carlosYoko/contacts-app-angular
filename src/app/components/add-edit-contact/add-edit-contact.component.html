@@ -6,20 +6,35 @@
 <div class="row">
     <div class="col-lg-4">
         Formulario
-        <form>
+        <form autocomplete="off">
             <div class="col-lg-12">
-                Nombre Completo (INPUT)
+                <mat-form-field class="example-container" [style.fontSize.px]=16>
+                    <mat-label>Nombre Completo</mat-label>
+                    <input matInput>
+                </mat-form-field>
             </div>
             <div class="col-lg-12">
-                Email (INPUT)
+                <mat-form-field class="example-container" [style.fontSize.px]=16>
+                    <mat-label>Email</mat-label>
+                    <input matInput>
+                </mat-form-field>
             </div>
             <br>
             <br>
             <div class="col-lg-12">
-                Fecha Ingreso (DATEPICKER)
+                <mat-form-field class="example-container">
+                    <mat-label>Fecha de ingreso</mat-label>
+                    <input matInput [matDatepicker]="picker">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi #picker></mat-datepicker>
+                </mat-form-field>
+
             </div>
             <div class="col-lg-12">
-                Telefono (INPUT)
+                <mat-form-field class="example-container">
+                    <mat-label>Telefono</mat-label>
+                    <input matInput>
+                </mat-form-field>
             </div>
             <div class="col-lg-12">
                 Sexo (RADIO BUTTON)

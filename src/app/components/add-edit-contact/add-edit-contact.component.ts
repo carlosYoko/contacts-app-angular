@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./add-edit-contact.component.css']
 })
 export class AddEditContactComponent {
-
+  sexo: any[] = ["Masculino", "Femenino"]
 }
