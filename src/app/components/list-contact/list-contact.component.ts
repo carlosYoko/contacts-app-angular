@@ -4,6 +4,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ContactService } from 'src/app/services/contact.service';
 import { Contact } from 'src/app/models/contact';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationMessageComponent } from '../shared/confirmation-message/confirmation-message.component';
 
 
 @Component({
@@ -15,13 +17,16 @@ export class ListContactComponent {
   public displayedColumns: string[] = ['id', 'fullName', 'phone', 'email', 'entryDate', 'sex', 'actions'];
   public dataSource = new MatTableDataSource<Contact>();
   public listContact?: Contact[];
+  public _dialog?: MatDialog;
+
   private readonly _contactService?: ContactService
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private readonly contactService: ContactService) {
+  constructor(private readonly contactService: ContactService, public dialog: MatDialog) {
     this._contactService = contactService;
+    this._dialog = dialog;
   }
 
   ngOnInit(): void {
@@ -45,8 +50,18 @@ export class ListContactComponent {
   }
 
   deleteContact(i: number) {
-    this._contactService?.deleteContactById(i);
-    this.loadContacts();
+    const dialogRef = this.dialog.open(ConfirmationMessageComponent, {
+      width: '450px',
+      data: { msg: "Seguro que quieres eliminar el contacto?" }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result)
+      if (result === 'accept') {
+        this._contactService?.deleteContactById(i);
+        this.loadContacts();
+      }
+    })
   }
 
 }
