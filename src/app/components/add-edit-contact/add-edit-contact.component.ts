@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
 
 @Component({
@@ -10,6 +11,17 @@ import { MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
     useValue: { color: 'primary' }
   }]
 })
+
 export class AddEditContactComponent {
-  sexo: any[] = ["Masculino", "Femenino"]
+  myForm!: FormGroup;
+
+  constructor(private readonly fb: FormBuilder) {
+    this.myForm = this.fb.group({
+      fullName: [''],
+      email: [''],
+      registerDate: [''],
+      telephone: [''],
+      sex: [''],
+    });
+  }
 }

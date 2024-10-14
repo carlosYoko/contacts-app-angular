@@ -8,8 +8,8 @@ import { AddEditContactComponent } from './components/add-edit-contact/add-edit-
 import { ListContactComponent } from './components/list-contact/list-contact.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ConfirmationMessageComponent } from './components/shared/confirmation-message/confirmation-message.component';
-
 import { AngularMaterialModule } from './components/shared/angular-material/angular-material.module';
+import { ReactiveFormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [
@@ -23,7 +23,8 @@ import { AngularMaterialModule } from './components/shared/angular-material/angu
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
