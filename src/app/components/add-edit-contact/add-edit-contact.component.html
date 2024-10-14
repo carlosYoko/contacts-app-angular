@@ -3,7 +3,6 @@
         <h2>Agregar cliente</h2>
     </div>
 </div>
-<pre>{{myForm.value | json}}</pre>
 <div class="row">
     <div class="col-lg-4">
         Formulario
@@ -45,7 +44,8 @@
             </div>
             <br>
             <div class="col-lg-12">
-                <button mat-raised-button color="primary" style="margin-right: 16px;">Aceptar</button>
+                <button mat-raised-button color="primary" style="margin-right: 16px;"
+                    (click)="saveContact()">Aceptar</button>
                 <button mat-raised-button color="warn" routerLink="/">Cancelar</button>
             </div>
         </form>

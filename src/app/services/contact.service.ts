@@ -21,11 +21,16 @@ export class ContactService {
 
   constructor() { }
 
-  getContacts() {
+  getContacts(): Contact[] {
     return this.listContact.slice()
   }
 
-  deleteContactById(i: number) {
+  deleteContactById(i: number): void {
     this.listContact.splice(i, 1)
   }
+
+  addContact(contact: Contact): void {
+    this.listContact.unshift(contact)
+  }
+
 }

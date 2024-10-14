@@ -62,7 +62,7 @@ export class ListContactComponent {
         this._contactService?.deleteContactById(i);
         this.loadContacts();
         this.snackBar.open('Contacto eliminado', '', {
-          duration: 200000
+          duration: 2000
         })
       }
     })
