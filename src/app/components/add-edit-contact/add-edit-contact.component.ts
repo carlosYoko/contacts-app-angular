@@ -25,7 +25,7 @@ export class AddEditContactComponent {
     private readonly snackBar: MatSnackBar
   ) {
     this.myForm = this.fb.group({
-      fullName: [''],
+      fullName: ['', Validators.required],
       email: [''],
       registerDate: [''],
       telephone: [''],
