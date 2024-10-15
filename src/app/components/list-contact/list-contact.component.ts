@@ -47,7 +47,6 @@ export class ListContactComponent {
   loadContacts() {
     this.listContact = this._contactService?.getContacts();
     this.dataSource = new MatTableDataSource(this.listContact);
-    console.log(this.listContact)
   }
 
   deleteContact(i: number) {
@@ -57,7 +56,6 @@ export class ListContactComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result)
       if (result === 'accept') {
         this._contactService?.deleteContactById(i);
         this.loadContacts();

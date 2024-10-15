@@ -7,6 +7,7 @@ import { Contact } from '../models/contact';
 
 export class ContactService {
   listContact: Contact[] = [
+    { id: 0, fullName: "Carlos Gimenez", phone: 634987263, email: "carlos.gimenez@example.com", entryDate: new Date(), sex: "Male" },
     { id: 1, fullName: "Kent Beck", phone: 634987263, email: "kent.beck@example.com", entryDate: new Date(), sex: "Male" },
     { id: 2, fullName: "Rebecca Wirfs", phone: 987234582, email: "rebecca.wirfs@example.com", entryDate: new Date(), sex: "Female" },
     { id: 3, fullName: "Martin Fowler", phone: 987234582, email: "martin.fowler@example.com", entryDate: new Date(), sex: "Male" },
@@ -31,6 +32,18 @@ export class ContactService {
 
   addContact(contact: Contact): void {
     this.listContact.unshift(contact)
+  }
+
+  getContact(index: number) {
+    return this.listContact[index]
+  }
+
+  editContact(contact: Contact, contactId: number) {
+    this.listContact[contactId].fullName = contact.fullName;
+    this.listContact[contactId].email = contact.email;
+    this.listContact[contactId].entryDate = contact.entryDate;
+    this.listContact[contactId].phone = contact.phone;
+    this.listContact[contactId].sex = contact.sex;
   }
 
 }

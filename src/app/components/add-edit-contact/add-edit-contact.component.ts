@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Route, Router } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Contact } from 'src/app/models/contact';
 import { ContactService } from 'src/app/services/contact.service';
 
@@ -18,11 +18,14 @@ import { ContactService } from 'src/app/services/contact.service';
 
 export class AddEditContactComponent {
   myForm!: FormGroup;
+  contactId: number | undefined;
+  action = "Crear";
 
   constructor(private readonly fb: FormBuilder,
     private readonly contactService: ContactService,
     private readonly route: Router,
-    private readonly snackBar: MatSnackBar
+    private readonly snackBar: MatSnackBar,
+    private readonly aRoute: ActivatedRoute
   ) {
     this.myForm = this.fb.group({
       fullName: ['', [Validators.required, Validators.maxLength(20)]],
@@ -31,6 +34,17 @@ export class AddEditContactComponent {
       telephone: ['', Validators.required],
       sex: ['', Validators.required],
     });
+
+    const idParam = 'id'
+    this.contactId = this.aRoute.snapshot.params[idParam]
+
+  }
+
+  ngOnInit(): void {
+    if (this.contactId !== undefined) {
+      this.action = "Editar"
+      this.contactToEdit();
+    }
   }
 
   saveContact(): void {
@@ -42,12 +56,39 @@ export class AddEditContactComponent {
       sex: this.myForm.get('sex')?.value,
     }
 
-    if (contact) {
-      this.contactService.addContact(contact)
-      this.route.navigate(['']);
-      this.snackBar.open('Contacto agregado', '', {
-        duration: 2000
-      })
+    if (this.contactId !== undefined) {
+      this.editContact(contact);
+    } else {
+      this.addContact(contact);
     }
+
   }
+
+  contactToEdit(): void {
+    const contact: Contact = this.contactService.getContact(this.contactId!)
+    this.myForm.patchValue({
+      fullName: contact.fullName,
+      email: contact.email,
+      registerDate: contact.entryDate,
+      telephone: contact.phone,
+      sex: contact.sex,
+    })
+  }
+
+  addContact(contact: Contact): void {
+    this.contactService.addContact(contact)
+    this.route.navigate(['/']);
+    this.snackBar.open('Contacto agregado', '', {
+      duration: 2000
+    })
+  }
+
+  editContact(contact: Contact): void {
+    this.contactService.editContact(contact, this.contactId!)
+    this.route.navigate(['/']);
+    this.snackBar.open('Contacto editado', '', {
+      duration: 2000
+    })
+  }
+
 }
